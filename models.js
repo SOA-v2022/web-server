@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// models of the sentiments in database
 const FaceSchema = new mongoose.Schema({
   img: {
     type: String,

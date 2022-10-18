@@ -5,8 +5,10 @@ const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
 const mongoose = require("mongoose");
 const Router = require("./routes");
+const vision_app = require("./vision");
 const app = express();
 
+// configurations for the server app
 const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
@@ -35,16 +37,9 @@ app.get("/", (req, res) => {
     res.send("Hello Sentiments");
 });
 
-// endpoint: for upload an image
-app.post('/api/uploadPicture', multipartMiddleware, (req, res, next) => {
-    console.log(req.files);
-    res.json({
-        'message': 'Picture uploaded successfully.'
-    });
-});
-
 // ==================================================
 
+// auxilliar for upload the images
 const multer = require("multer");
 const storageEngine = multer.diskStorage({
     destination: "./images",
@@ -60,7 +55,7 @@ const upload = multer({
 // endpoint: for upload an image (definitive)
 app.post("/uploadPicture", upload.single("image"), async (req, res) => {
     // console.log(req.file.filename);
-    Router.vision_function(req.file.filename);
+    vision_app.vision_function(req.file.filename);
     res.json({
         'message': 'Picture uploaded successfully.'
     });

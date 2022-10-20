@@ -25,7 +25,6 @@ const FaceSchema = new mongoose.Schema({
   time: {
     type: String,
     default: new Date(),
-    // default: new Date().toUTCString(),
     required: false,
   }
 });

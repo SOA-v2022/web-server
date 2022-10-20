@@ -8,8 +8,9 @@ const client = new vision.ImageAnnotatorClient({
     keyFilename: "vision_api_key.json"
 });
 
+// param: face_analysis = 'sadface.jpg'
+// this is the filename to examine
 async function vision_function(face_analysis) {
-    // face_analysis = 'sadface.jpg'
 
     // Performs face detection on the image file
     const [result] = await client.faceDetection(`./images/${face_analysis}`);
@@ -36,14 +37,15 @@ async function vision_function(face_analysis) {
     const face = new faceModel(annotations);
 
     try {
+        // this can response success: response.send(face); 
         await face.save();
-        //     response.send(face);
     } catch (error) {
-        //     response.status(500).send(error);
+        // this can response an error: response.status(500).send(error);
         console.log(error);
     }
 }
 
+// exports the module
 module.exports = {
     vision_function,
 }

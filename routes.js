@@ -13,7 +13,7 @@ app.get("/faces", async (request, response) => {
     }
 });
 
-// module.exports = app;
+// exports the module example: module.exports = app;
 module.exports = {
     app,
 }

@@ -54,7 +54,6 @@ const upload = multer({
 
 // endpoint: for upload an image (definitive)
 app.post("/uploadPicture", upload.single("image"), async (req, res) => {
-    // console.log(req.file.filename);
     vision_app.vision_function(req.file.filename);
     res.json({
         'message': 'Picture uploaded successfully.'
@@ -83,6 +82,7 @@ app.post('/uploadPictures', multipartMiddleware, async (req, res, next) => {
     }
 });
 
+// using methods from routes.js
 app.use(Router.app);
 
 // prepare the server
